@@ -1,5 +1,7 @@
 # Maze Rats Character Generator
 
+http://maze-rats-chargen.cloud.maclure.info/
+
 ## Deployment Notes
 
 ```
@@ -10,5 +12,6 @@ dokku postgres:create maze-rats-chargen
 git remote add dokku dokku@maze-rats-chargen.cloud.maclure.info:maze-rats-chargen
 
 # push to deploy
+git push dokku master
 
 ```
