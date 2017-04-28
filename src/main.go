@@ -189,10 +189,10 @@ func generateCharacter(data MazeData) MazeChar {
 	return char
 }
 
-func renderCharacterAsHtml(char MazeChar) {
+func renderCharacterAsHtml(w http.ResponseWriter, char MazeChar) {
 
 	// TODO do this once at start when rendering web pages
-	t, err := template.ParseFiles("chargen.html")
+	t, err := template.ParseFiles("../chargen.html")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -203,12 +203,18 @@ func renderCharacterAsHtml(char MazeChar) {
 	}
 }
 
+func renderCharacterAsJson(w http.ResponseWriter, char MazeChar) {
+	w.Header().Set("Content-Type", "application/json")
+	fmt.Fprintf(w, prettyPrint(char))
+}
+
 func handler(w http.ResponseWriter, r *http.Request) {
+
 	var data MazeData
 	var char MazeChar
 	var err error
 
-	data, err = loadData("./data.json")
+	data, err = loadData("../data.json")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -218,8 +224,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	log.Println("Generated " + char.FirstName + " " + char.Surname + ", " + char.Background)
 
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Content-Type", "application/json")
-	fmt.Fprintf(w, prettyPrint(char))
+
+	renderCharacterAsJson(w, char)
 }
 
 func main() {
