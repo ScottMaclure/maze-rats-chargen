@@ -192,7 +192,7 @@ func generateCharacter(data MazeData) MazeChar {
 func renderCharacterAsHtml(w http.ResponseWriter, char MazeChar) {
 
 	// TODO do this once at start when rendering web pages
-	t, err := template.ParseFiles("../chargen.html")
+	t, err := template.ParseFiles("./chargen.html")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -214,7 +214,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	var char MazeChar
 	var err error
 
-	data, err = loadData("../data.json")
+	data, err = loadData("./data.json")
 	if err != nil {
 		log.Fatal(err)
 	}
