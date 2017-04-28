@@ -1,4 +1,7 @@
 {
 	"comment": "Empty - no deps?",
-	"rootPath": "github.com/scottmaclure/maze-rats-chargen"
+	"rootPath": "github.com/scottmaclure/maze-rats-chargen",
+	"heroku": {
+		"goVersion": "go1.8"
+	}
 }
