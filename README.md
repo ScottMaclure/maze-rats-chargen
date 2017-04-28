@@ -2,6 +2,8 @@
 
 http://maze-rats-chargen.cloud.maclure.info/
 
+https://www.drivethrurpg.com/product/197158/Maze-Rats
+
 ## Deployment Notes
 
 ```
