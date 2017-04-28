@@ -1,0 +1,1 @@
+web: maze-rats-chargen
