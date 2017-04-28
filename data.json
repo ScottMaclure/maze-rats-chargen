@@ -1,0 +1,46 @@
+{
+	"Features": [
+		"AB", "SS", "PA"
+	],
+	"Paths": [
+		"Briarborn", "Fingersmith","Roofrunner","Shadowjack"
+	],
+	"Items": [
+		"Animal Scent", "Bear Trap", "Bedroll", "Caltrops", "Chain (10ft)", "Chalk"
+	],
+	"CombatGear": [
+		"Light Weapon (1 hand)", "Heavy Weapon (+1 damage, 2 hands)", "Ranged Weapon (2 hands)"
+	],
+	"Appearances": [
+		"Aquiline", "Atheletic", "Barrel-Chested", "Boney", "Brawny", "Brutish"
+	],
+	"PhysicalDetails": [
+		"Acid Scars", "Battle Scars", "Birthmark", "Braided Hair", "Brand Mark",  "Broken Nose"
+	],
+	"Backgrounds": [
+		"Alchemist", "Beggar-prince", "Blackmailer", "Bounty-hunter", "Chimney sweep", "Coin-clipper"
+	],
+	"Clothing": [
+		"Antique", "Battle-torn", "Bedraggled", "Blood-stained", "Ceremonial", "Dated"
+	],
+	"Personalities": [
+		"Bitter", "Brave", "Cautious", "Chipper", "Contrary", "Cowardly"
+	],
+	"Mannerisms": [
+		"Anecdotes", "Breathy", "Chuckles", "Clipped", "Cryptic", "Deep voice"
+	],
+	"Characters": {
+		"FemaleNames": [
+			"Adelaide","Alma", "Barsaba", "Beatrix", "Bianca", "Cleopha"
+		],
+		"MaleNames": [
+			"Balthazar", "Basil", "Bertram", "Blaxton", "Chadwick", "Clovis"
+		],
+		"UpperClassSurnames": [
+			"Belvedere","Birthsea", "Calaver", "Carvolo", "De Rippe", "Droll"
+		],
+		"LowerClassSurnames": [
+			"Barrow", "Beetleman", "Berrycloth", "Birdwhistle", "Bobich", "Chips"
+		]
+	}
+}
