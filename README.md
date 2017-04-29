@@ -1,8 +1,18 @@
 # Maze Rats Character Generator
 
-http://maze-rats-chargen.cloud.maclure.info/
+## Overview
+
+Maze Rats RPG, by Ben Milton:
 
 https://www.drivethrurpg.com/product/197158/Maze-Rats
+
+Generate a new level 1 character, here:
+
+http://maze-rats-chargen.cloud.maclure.info/
+
+Generate in JSON format, to use in other programs:
+
+http://maze-rats-chargen.cloud.maclure.info/json
 
 ## Deployment Notes
 

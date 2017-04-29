@@ -58,6 +58,11 @@ type MazeChar struct {
 	XP             int
 }
 
+// globals
+var data MazeData
+var char MazeChar
+var tpl *template.Template
+
 // why, golang?
 func contains(s []string, e string) bool {
 	for _, a := range s {
@@ -186,32 +191,40 @@ func generateCharacter(data MazeData) MazeChar {
 	char.FirstName = getRandom(append(data.Characters.MaleNames, data.Characters.FemaleNames...))
 	char.Surname = getRandom(append(data.Characters.UpperClassSurnames, data.Characters.LowerClassSurnames...))
 
+	log.Println("Generated " + char.FirstName + " " + char.Surname + ", " + char.Background)
+
 	return char
 }
 
 func renderCharacterAsHtml(w http.ResponseWriter, char MazeChar) {
-
-	// TODO do this once at start when rendering web pages
-	t, err := template.ParseFiles("./chargen.html")
+	err := tpl.Execute(w, char)
 	if err != nil {
-		log.Fatal(err)
-	}
-
-	err = t.Execute(os.Stdout, char)
-	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 }
 
 func renderCharacterAsJson(w http.ResponseWriter, char MazeChar) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
 	fmt.Fprintf(w, prettyPrint(char))
 }
 
-func handler(w http.ResponseWriter, r *http.Request) {
+func handleJson(w http.ResponseWriter, r *http.Request) {
+	char = generateCharacter(data)
+	renderCharacterAsJson(w, char)
+}
 
-	var data MazeData
-	var char MazeChar
+func handleHtml(w http.ResponseWriter, r *http.Request) {
+	char = generateCharacter(data)
+	renderCharacterAsHtml(w, char)
+}
+
+func main() {
+
+	rand.Seed(time.Now().Unix()) // pseudorandom
+
+	// Load shared resources once on start, not every request.
+
 	var err error
 
 	data, err = loadData("./data.json")
@@ -220,20 +233,13 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 	//	log.Println("data:", prettyPrint(data))
 
-	char = generateCharacter(data)
-	log.Println("Generated " + char.FirstName + " " + char.Surname + ", " + char.Background)
+	tpl, err = template.ParseFiles("./chargen.html")
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	w.Header().Set("Access-Control-Allow-Origin", "*")
+	http.HandleFunc("/", handleHtml)
+	http.HandleFunc("/json", handleJson) // TODO What about using accept header?
 
-	renderCharacterAsJson(w, char)
-}
-
-func main() {
-
-	rand.Seed(time.Now().Unix()) // pseudorandom
-
-	//	renderCharacterAsHtml(char)
-
-	http.HandleFunc("/", handler)
 	http.ListenAndServe(":5000", nil)
 }
