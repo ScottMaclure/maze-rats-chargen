@@ -11,6 +11,7 @@ import (
 	"math/rand"
 	"net/http"
 	"os"
+	"reflect"
 	"time"
 )
 
@@ -30,6 +31,14 @@ type MazeData struct {
 		FemaleNames        []string
 		UpperClassSurnames []string
 		LowerClassSurnames []string
+	}
+	Magic struct {
+		PhysicalEffects  []string
+		PhysicalElements []string
+		PhysicalForms    []string
+		EtherialEffects  []string
+		EtherialElements []string
+		EtherialForms    []string
 	}
 }
 
@@ -62,6 +71,9 @@ type MazeChar struct {
 var data MazeData
 var char MazeChar
 var tpl *template.Template
+
+// Used for generating MazeData.Magic
+var spellTable [6][2][2]string
 
 // why, golang?
 func contains(s []string, e string) bool {
@@ -134,6 +146,40 @@ func randomItems(options []string, max int) []string {
 	return items
 }
 
+func initSpellTable() {
+
+	spellTable[0][0][0] = "PhysicalEffects"
+	spellTable[0][0][1] = "PhysicalForms"
+	spellTable[0][1][0] = "EtherialElements"
+	spellTable[0][1][1] = "PhysicalForms"
+
+	spellTable[1][0][0] = "PhysicalEffects"
+	spellTable[1][0][1] = "EtherialForms"
+	spellTable[1][1][0] = "EtherialElements"
+	spellTable[1][1][1] = "EtherialForms"
+
+	spellTable[2][0][0] = "EtherialEffects"
+	spellTable[2][0][1] = "PhysicalForms"
+	spellTable[2][1][0] = "PhysicalEffects"
+	spellTable[2][1][1] = "PhysicalElements"
+
+	spellTable[3][0][0] = "EtherialEffects"
+	spellTable[3][0][1] = "EtherialForms"
+	spellTable[3][1][0] = "PhysicalEffects"
+	spellTable[3][1][1] = "EtherialElements"
+
+	spellTable[4][0][0] = "PhysicalElements"
+	spellTable[4][0][1] = "PhysicalForms"
+	spellTable[4][1][0] = "EtherialEffects"
+	spellTable[4][1][1] = "PhysicalElements"
+
+	spellTable[5][0][0] = "PhysicalElements"
+	spellTable[5][0][1] = "EtherialForms"
+	spellTable[5][1][0] = "EtherialEffects"
+	spellTable[5][1][1] = "EtherialElements"
+
+}
+
 func generateStartingFeature(data MazeData, char *MazeChar) {
 	char.Feature = getRandom(data.Features)
 	switch char.Feature {
@@ -196,6 +242,27 @@ func generateCharacter(data MazeData) MazeChar {
 	return char
 }
 
+// Use the spellTable and json Magic data to generate a random combination spellname.
+func generateSpellName() string {
+
+	row := randInt(0, 5)
+	col := randInt(0, 1)
+
+	spellType1 := spellTable[row][col][0]
+	spellType2 := spellTable[row][col][1]
+
+	//	log.Println("row:", row+1, "col:", col+1, "spellType1:", spellType1, "spellType2:", spellType2)
+
+	v := reflect.ValueOf(data.Magic)
+	spellValue1 := v.FieldByName(spellType1).Interface().([]string)
+	spellValue2 := v.FieldByName(spellType2).Interface().([]string)
+
+	spellName := getRandom(spellValue1) + " " + getRandom(spellValue2)
+	log.Println("spellName (" + spellType1 + " + " + spellType2 + "): " + spellName)
+
+	return spellName
+}
+
 func renderCharacterAsHtml(w http.ResponseWriter, char MazeChar) {
 	err := tpl.Execute(w, char)
 	if err != nil {
@@ -203,9 +270,13 @@ func renderCharacterAsHtml(w http.ResponseWriter, char MazeChar) {
 	}
 }
 
-func renderCharacterAsJson(w http.ResponseWriter, char MazeChar) {
+func writeJsonHeaders(w http.ResponseWriter) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
+}
+
+func renderCharacterAsJson(w http.ResponseWriter, char MazeChar) {
+	writeJsonHeaders(w)
 	fmt.Fprintf(w, prettyPrint(char))
 }
 
@@ -217,6 +288,11 @@ func handleJson(w http.ResponseWriter, r *http.Request) {
 func handleHtml(w http.ResponseWriter, r *http.Request) {
 	char = generateCharacter(data)
 	renderCharacterAsHtml(w, char)
+}
+
+func handleJsonSpell(w http.ResponseWriter, r *http.Request) {
+	writeJsonHeaders(w)
+	fmt.Fprintf(w, prettyPrint(generateSpellName()))
 }
 
 func main() {
@@ -238,8 +314,11 @@ func main() {
 		log.Fatal(err)
 	}
 
+	initSpellTable()
+
 	http.HandleFunc("/", handleHtml)
 	http.HandleFunc("/json", handleJson) // TODO What about using accept header?
+	http.HandleFunc("/spell", handleJsonSpell)
 
 	http.ListenAndServe(":5000", nil)
 }

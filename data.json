@@ -42,5 +42,25 @@
 		"LowerClassSurnames": [
 			"Barrow", "Beetleman", "Berrycloth", "Birdwhistle", "Bobich", "Chips"
 		]
+	},
+	"Magic": {
+		"PhysicalEffects": [
+			"Animating", "Attracting", "Binding", "Blossoming", "Consuming", "Creeping"
+		],
+		"PhysicalElements": [
+			"Acid", "Amber", "Bark", "Blood", "Bone", "Brine"
+		],
+		"PhysicalForms": [
+			"Altar", "Armor", "Arrow", "Beast", "Blade", "Cauldron"
+		],
+		"EtherialEffects": [
+			"Avenging", "Banishing", "Bewildering", "Blinding", "Charming", "Communicating"
+		],
+		"EtherialElements": [
+			"Ash", "Chaos", "Distortion", "Dream", "Dust", "Echo"
+		],
+		"EtherialForms": [
+			"Aura", "Beacon", "Beam", "Blast", "Blob", "Bolt"
+		]
 	}
 }
