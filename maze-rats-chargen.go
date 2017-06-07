@@ -7,11 +7,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"html/template"
+	"io/ioutil"
 	"log"
 	"math/rand"
 	"net/http"
 	"os"
 	"reflect"
+	"strings"
 	"time"
 )
 
@@ -309,7 +311,13 @@ func main() {
 	}
 	//	log.Println("data:", prettyPrint(data))
 
-	tpl, err = template.ParseFiles("./chargen.html")
+	file, err := ioutil.ReadFile("./chargen.html")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	funcs := template.FuncMap{"join": strings.Join}
+	tpl, err = template.New("chargen").Funcs(funcs).Parse(string(file))
 	if err != nil {
 		log.Fatal(err)
 	}
