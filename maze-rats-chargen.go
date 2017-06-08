@@ -299,6 +299,8 @@ func handleJsonSpell(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 
+	log.Println("maze-rats-chargen server starting up.")
+
 	rand.Seed(time.Now().Unix()) // pseudorandom
 
 	// Load shared resources once on start, not every request.
@@ -329,4 +331,5 @@ func main() {
 	http.HandleFunc("/spell", handleJsonSpell)
 
 	http.ListenAndServe(":5000", nil)
+
 }
