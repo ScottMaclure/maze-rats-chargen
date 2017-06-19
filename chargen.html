@@ -55,14 +55,15 @@
 			<div style="clear:both;"></div>
 		</dl>
 		<dl>
+			<dt>Personality</dt><dd>{{.Personality}}</dd>
 			<dt>Appearance</dt><dd>{{.Appearance}}</dd>
+			<dt>Background</dt><dd>{{.Background}}</dd>
 			<dt>Detail</dt><dd>{{.PhysicalDetail}}</dd>
 			<dt>Clothing</dt><dd>{{.Clothing}}</dd>
-			<dt>Personality</dt><dd>{{.Personality}}</dd>
 			<dt>Mannerism</dt><dd>{{.Mannerism}}</dd>
 			<div style="clear:both;"></div>
 		</dl>
 		<h4>Background</h4>
-		<p>{{.FirstName}} {{.Surname}} is a <span class="lowercase">{{.Personality}}</span> {{.Background}}, <span class="lowercase">{{.Appearance}} in appearance, with a {{.PhysicalDetail}}.</span> They <span class="lowercase">wear {{.Clothing}} clothing, and have a {{.Mannerism}} manner.</span></p>
+		<p>{{.FirstName}} {{.Surname}} is <span class="lowercase">{{nls .Personality}}</span>, <span class="lowercase">{{.Appearance}} {{.Background}}, with {{nls .PhysicalDetail}}.</span> They <span class="lowercase">wear {{.Clothing}} clothing, and have {{nls .Mannerism}} manner.</span></p>
 	</body>
 </html>

@@ -6,6 +6,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/jinzhu/inflection"
 	"html/template"
 	"io/ioutil"
 	"log"
@@ -85,6 +86,51 @@ func contains(s []string, e string) bool {
 		}
 	}
 	return false
+}
+
+var vowels = []string{"a", "e", "i", "o", "u"}
+
+/**
+ * Given a string input, return it formatted for a sentence.
+ * Doesn't care about capitalization, that's handled by css.
+ * E.g. "Battle Scars" -> "Battle Scars" (plural)
+ * "Birthmark" -> "a Birthmark" (a)
+ * "Animal Scent" -> "an Animal Scent" (an)
+ * As more cases as discovered, reveal here.
+ */
+func naturalLanguageSplice(input string) string {
+
+	input = strings.TrimSpace(input)
+
+	//  plural test, "Battle Scars" means NO a OR an.
+	if isPlural(input) {
+		return input
+	}
+
+	// vowel test for "an apple" etc.
+	first := strings.ToLower(input[0:1])
+	if contains(vowels, first) {
+		return "an " + input
+	}
+
+	return "a " + input
+}
+
+func isPlural(input string) bool {
+
+	words := strings.Split(input, " ")
+	lastWord := strings.ToLower(words[len(words)-1])
+	singular := inflection.Singular(lastWord)
+	plural := inflection.Plural(lastWord)
+
+	// log.Printf("lastWord=%s, singular=%s, plural=%s", lastWord, singular, plural)
+
+	if singular != plural && lastWord == plural {
+		return true
+	}
+
+	return false
+
 }
 
 func randInt(min, max int) int {
@@ -180,6 +226,10 @@ func initSpellTable() {
 	spellTable[5][1][0] = "EtherialEffects"
 	spellTable[5][1][1] = "EtherialElements"
 
+}
+
+func initInflections() {
+	inflection.AddUncountable("cautious")
 }
 
 func generateStartingFeature(data MazeData, char *MazeChar) {
@@ -318,13 +368,17 @@ func main() {
 		log.Fatal(err)
 	}
 
-	funcs := template.FuncMap{"join": strings.Join}
+	funcs := template.FuncMap{
+		"join": strings.Join,
+		"nls":  naturalLanguageSplice,
+	}
 	tpl, err = template.New("chargen").Funcs(funcs).Parse(string(file))
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	initSpellTable()
+	initInflections()
 
 	http.HandleFunc("/", handleHtml)
 	http.HandleFunc("/json", handleJson) // TODO What about using accept header?
