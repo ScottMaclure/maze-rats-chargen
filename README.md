@@ -14,6 +14,16 @@ Generate in JSON format, to use in other programs:
 
 http://maze-rats-chargen.cloud.maclure.info/json
 
+## Development Notes
+
+```
+# run with coverage report
+go test github.com/scottmaclure/maze-rats-chargen -cover
+
+# verbose mode, for logs
+go test github.com/scottmaclure/maze-rats-chargen -test.v
+```
+
 ## Deployment Notes
 
 ```
