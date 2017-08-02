@@ -15,10 +15,11 @@
 
 ## Done
 
-### 2017-08-02
+### 2017-08-02 (and earlier)
 
-* Display abilities with flexbox
-* Render static assets
+* Display abilities, details with flexbox
+* Render static assets (no caching, do that later with nginx)
+* Improve background sentence with "naturalLanguageSplice" (more than just a or an) (needs further work)
 
 ### 2017-06-19
 
