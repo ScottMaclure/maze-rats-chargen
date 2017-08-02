@@ -1,69 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-GB">
 	<head>
 		<title>Maze Rats Character Generator</title>
+		<meta charset="utf-8">
 		<meta name=viewport content="width=device-width, initial-scale=1">
-		<style>
-			body {
-				background-color: #eee;
-				font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace;
-			}
-			dl {
-				margin-bottom: 20px;
-				clear: both;
-			}
-			dt {
-				font-weight: bold;
-				float: left;
-				clear: both;
-				width: 200px;
-				margin-bottom: 5px;
-				border-bottom: 1px dotted #ccc;
-			}
-			dd {
-				float: left;
-				margin: 0;
-				border-bottom: 1px dotted #ccc;
-			}
-			.lowercase {
-				text-transform: lowercase;
-			}
-		</style>
+		<link rel="stylesheet" media="screen" href="/static/main.css">
 	</head>
 	<body>
-		<h1>{{.FirstName}} {{.Surname}}, {{.Background}}</h1>
-		<dl>
-			<dt>Level</dt><dd>{{.Level}}</dd>
-			<dt>XP</dt><dd>{{.XP}}</dd>
-			<div style="clear:both;"></div>
-		</dl>
-		<dl>
-			<dt>Strength</dt><dd>+{{.Strength}}</dd>
-			<dt>Dexterity</dt><dd>+{{.Dexterity}}</dd>
-			<dt>Will</dt><dd>+{{.Will}}</dd>
-			<dt>Attack Bonus</dt><dd>+{{.AttackBonus}}</dd>
-			<dt>Armor</dt><dd>{{.ArmorRating}}</dd>
-			<dt>Health</dt><dd>{{.Health}}</dd>
-			<div style="clear:both;"></div>
-		</dl>
-		<dl>
-			<dt>Items</dt><dd>{{join .Items ", "}}</dd>
-			<div style="clear:both;"></div>
-		</dl>
-		<dl>
-			<dt>Gear</dt><dd>{{join .CombatGear ", "}}</dd>
-			<div style="clear:both;"></div>
-		</dl>
-		<dl>
-			<dt>Personality</dt><dd>{{.Personality}}</dd>
-			<dt>Appearance</dt><dd>{{.Appearance}}</dd>
-			<dt>Background</dt><dd>{{.Background}}</dd>
-			<dt>Detail</dt><dd>{{.PhysicalDetail}}</dd>
-			<dt>Clothing</dt><dd>{{.Clothing}}</dd>
-			<dt>Mannerism</dt><dd>{{.Mannerism}}</dd>
-			<div style="clear:both;"></div>
-		</dl>
-		<h4>Background</h4>
-		<p>{{.FirstName}} {{.Surname}} is <span class="lowercase">{{nls .Personality}}</span>, <span class="lowercase">{{.Appearance}} {{.Background}}, with {{nls .PhysicalDetail}}.</span> They <span class="lowercase">wear {{.Clothing}} clothing, and have {{nls .Mannerism}} manner.</span></p>
+		<main id="main">
+		
+			<h1>{{.FirstName}} {{.Surname}}</h1>
+			<div class="subtitle">{{.Background}}</div>
+			
+			<div class="container container-abilities">
+				<div class="item">
+					<div>Strength</div>
+					<div>+{{.Strength}}</div>
+				</div>
+				<div class="item">
+					<div>Dexterity</div>
+					<div>+{{.Dexterity}}</div>
+				</div>
+				<div class="item">
+					<div>Will</div>
+					<div>+{{.Will}}</div>
+				</div>
+			</div>
+			
+			<div class="container container-details">
+			
+				<dl>
+					<dt>Level</dt><dd>{{.Level}}</dd>
+					<dt>XP</dt><dd>{{.XP}}</dd>
+					<dt>Attack Bonus</dt><dd>+{{.AttackBonus}}</dd>
+					<dt>Armor</dt><dd>{{.ArmorRating}}</dd>
+					<dt>Health</dt><dd>{{.Health}}</dd>
+					<div style="clear:both;"></div>
+				</dl>
+				
+				<dl>
+					<dt>Appearance</dt><dd>{{.Appearance}}</dd>
+					<dt>Detail</dt><dd>{{.PhysicalDetail}}</dd>
+					<dt>Clothing</dt><dd>{{.Clothing}}</dd>
+					<dt>Personality</dt><dd>{{.Personality}}</dd>
+					<dt>Mannerism</dt><dd>{{.Mannerism}}</dd>
+					<div style="clear:both;"></div>
+				</dl>
+			
+			</div>
+			
+			<dl>
+				<dt>Items</dt><dd>{{join .Items ", "}}</dd>
+				<div style="clear:both;"></div>
+			</dl>
+			
+			<dl>
+				<dt>Gear</dt><dd>{{join .CombatGear ", "}}</dd>
+				<div style="clear:both;"></div>
+			</dl>
+			
+			<h4>Background</h4>
+			<p>
+			{{.FirstName}} {{.Surname}} is <span class="lowercase">{{nls .Personality}}</span> {{.Background}}, 
+			<span class="lowercase">{{.Appearance}} in appearance, with {{nls .PhysicalDetail}}.</span> 
+			They <span class="lowercase">wear {{.Clothing}} clothing, and have {{nls .Mannerism}} manner.</span>
+			</p>
+		
+		</main>
 	</body>
 </html>

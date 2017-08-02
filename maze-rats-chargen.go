@@ -384,6 +384,8 @@ func main() {
 	http.HandleFunc("/json", handleJson) // TODO What about using accept header?
 	http.HandleFunc("/spell", handleJsonSpell)
 
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
+
 	http.ListenAndServe(":5000", nil)
 
 }

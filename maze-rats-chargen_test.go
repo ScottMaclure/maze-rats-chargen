@@ -74,3 +74,11 @@ func Test_naturalLanguageSplice(t *testing.T) {
 	}
 
 }
+
+func Test_generateSpellName(t *testing.T) {
+	r := generateSpellName()
+	// TODO implement test
+	if r != "foiejef" {
+		t.Errorf("Got %s", r)
+	}
+}

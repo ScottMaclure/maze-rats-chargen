@@ -1,0 +1,60 @@
+body {
+	background-color: #eee;
+	font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace;
+}
+
+main {
+	max-width: 40em;
+	margin: auto;
+}
+
+dl {
+	margin-bottom: 20px;
+	clear: both;
+}
+dt {
+	font-weight: bold;
+	float: left;
+	clear: both;
+	width: 200px;
+	margin-bottom: 5px;
+	border-bottom: 1px dotted #ccc;
+}
+dd {
+	float: left;
+	margin: 0;
+	border-bottom: 1px dotted #ccc;
+}
+
+.subtitle {
+	font-weight: bold;
+	margin-top: -1em;
+	font-size: 1.25em;
+	margin-bottom: 1em;
+}
+
+.lowercase {
+	text-transform: lowercase;
+}
+
+/* https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
+
+.container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.container-abilities {
+	justify-content: center;
+}
+
+.container-abilities > .item {
+	flex: 0 1 auto;
+	border: 1px solid #ccc;
+	padding: 1em;
+	border-radius: 1em;
+	margin-right: 1em;
+	margin-bottom: 1em;
+}
