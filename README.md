@@ -16,6 +16,8 @@ http://maze-rats-chargen.cloud.maclure.info/json
 
 ## Development Notes
 
+Tests:
+
 ```
 # run with coverage report
 go test github.com/scottmaclure/maze-rats-chargen -cover
