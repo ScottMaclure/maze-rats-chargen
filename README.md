@@ -14,6 +14,10 @@ Generate in JSON format, to use in other programs:
 
 http://maze-rats-chargen.cloud.maclure.info/json
 
+Generate a random spell name:
+
+http://maze-rats-chargen.cloud.maclure.info/spell
+
 ## Development Notes
 
 Setup:
