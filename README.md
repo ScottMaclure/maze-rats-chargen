@@ -30,6 +30,9 @@ go test github.com/scottmaclure/maze-rats-chargen -cover
 
 # verbose mode, for logs
 go test github.com/scottmaclure/maze-rats-chargen -test.v
+
+# run a single test function
+go test -test.run=Test_naturalLanguageSplice
 ```
 
 Keeping deps up-to-date:

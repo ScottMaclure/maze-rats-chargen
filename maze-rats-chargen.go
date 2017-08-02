@@ -6,7 +6,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/jinzhu/inflection"
 	"html/template"
 	"io/ioutil"
 	"log"
@@ -16,6 +15,8 @@ import (
 	"reflect"
 	"strings"
 	"time"
+
+	"github.com/jinzhu/inflection"
 )
 
 type MazeData struct {
@@ -347,6 +348,15 @@ func handleJsonSpell(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, prettyPrint(generateSpellName()))
 }
 
+func initData() {
+	var err error
+	data, err = loadData("./data.json")
+	if err != nil {
+		log.Fatal(err)
+	}
+	//	log.Println("data:", prettyPrint(data))
+}
+
 func main() {
 
 	log.Println("maze-rats-chargen server starting up.")
@@ -357,11 +367,7 @@ func main() {
 
 	var err error
 
-	data, err = loadData("./data.json")
-	if err != nil {
-		log.Fatal(err)
-	}
-	//	log.Println("data:", prettyPrint(data))
+	initData()
 
 	file, err := ioutil.ReadFile("./chargen.html")
 	if err != nil {

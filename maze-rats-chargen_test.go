@@ -1,6 +1,7 @@
 package main
 
 import "testing"
+import "strings"
 
 type Test struct {
 	in  int
@@ -76,9 +77,15 @@ func Test_naturalLanguageSplice(t *testing.T) {
 }
 
 func Test_generateSpellName(t *testing.T) {
+
+	initData()
+	initSpellTable()
+
 	r := generateSpellName()
-	// TODO implement test
-	if r != "foiejef" {
-		t.Errorf("Got %s", r)
+	words := strings.Fields(r)
+
+	if len(words) != 2 {
+		t.Errorf("Expected 2 words, got '%s'", r)
 	}
+
 }
