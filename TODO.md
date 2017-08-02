@@ -2,17 +2,23 @@
 
 ## Sooner
 
-* Display with flexbox
-* Display with "handrawn" bordering (as per charsheet)
+* Display containers with "handrawn" bordering (as per charsheet)
+* Change ability generation to +2, +1, +0? Or keep random?
 
 ## Later
 
-* Render static html assets (css), get nginx/dokku to cache with a longer ttl
+* Get nginx/dokku to cache static assets with a longer ttl
 * 100% test coverage
 * Split codebase into a few package files
-* Convert "Manner" data to adjectives (e.g. "Anecdotes" -> "Anecdotal")
+* Convert raw "Manner" data to adjectives (e.g. "Anecdotes" -> "Anecdotal")
+* Complete json data file
 
 ## Done
+
+### 2017-08-02
+
+* Display abilities with flexbox
+* Render static assets
 
 ### 2017-06-19
 

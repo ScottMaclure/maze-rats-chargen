@@ -16,6 +16,12 @@ http://maze-rats-chargen.cloud.maclure.info/json
 
 ## Development Notes
 
+Setup:
+
+```
+go get -u github.com/kardianos/govendor
+```
+
 Tests:
 
 ```
@@ -24,6 +30,13 @@ go test github.com/scottmaclure/maze-rats-chargen -cover
 
 # verbose mode, for logs
 go test github.com/scottmaclure/maze-rats-chargen -test.v
+```
+
+Keeping deps up-to-date:
+
+```
+govendor list
+github.com/jinzhu/inflection
 ```
 
 ## Deployment Notes
