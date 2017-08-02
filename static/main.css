@@ -52,9 +52,12 @@ dd {
 
 .container-abilities > .item {
 	flex: 0 1 auto;
-	border: 1px solid #ccc;
+	border: 1px solid #000;
 	padding: 1em;
 	border-radius: 1em;
 	margin-right: 1em;
 	margin-bottom: 1em;
+	border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+	width: 5em;
+	text-align: center;
 }
